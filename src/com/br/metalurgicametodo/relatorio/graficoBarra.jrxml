@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5e06546-f7a5-4dab-b386-28f0d640b3b3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="104"/>
+	<subDataset name="Grafico" uuid="76f05cb1-8a9e-4cd3-add9-4baba93d77db">
+		<queryString>
+			<![CDATA[SELECT
+     PRODUTO."NOME" AS PRODUTO_NOME,
+     PRODUTO."QUANTIDADE" AS PRODUTO_QUANTIDADE
+FROM
+     "PAP"."PRODUTO" PRODUTO
+where quantidade >10]]>
+		</queryString>
+		<field name="PRODUTO_NOME" class="java.lang.String"/>
+		<field name="PRODUTO_QUANTIDADE" class="java.math.BigDecimal"/>
+		<group name="PRODUTO_NOME">
+			<groupExpression><![CDATA[$F{PRODUTO_NOME}]]></groupExpression>
+		</group>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT
+     PRODUTO."DESCRICAO_PRODUTO" AS PRODUTO_DESCRICAO_PRODUTO,
+     PRODUTO."NOME" AS PRODUTO_NOME,
+     PRODUTO."TIPO_PRODUTO" AS PRODUTO_TIPO_PRODUTO,
+     PRODUTO."CODIGO_PRODUTO" AS PRODUTO_CODIGO_PRODUTO
+FROM
+     "PAP"."PRODUTO" PRODUTO]]>
+	</queryString>
+	<field name="PRODUTO_DESCRICAO_PRODUTO" class="java.lang.String"/>
+	<field name="PRODUTO_NOME" class="java.lang.String"/>
+	<field name="PRODUTO_TIPO_PRODUTO" class="java.lang.String"/>
+	<field name="PRODUTO_CODIGO_PRODUTO" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="120" y="0" width="335" height="39" uuid="c7b913ac-fcd9-4c08-9550-2621d4376563"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Black" size="24"/>
+				</textElement>
+				<text><![CDATA[Gráfico Produtos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="355" y="0" width="200" height="20" uuid="897aa651-bee4-499e-bf7d-62694bb3ed6b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="317" splitType="Stretch">
+			<bar3DChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="317" uuid="b915bb34-b313-42c0-bffc-112463abb73e"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="Grafico" uuid="3093749a-e7f7-4d0d-8e52-8366dab37c4b"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Dummy Series"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{PRODUTO_NOME}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{PRODUTO_QUANTIDADE}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="7fd58258-503f-4005-b0be-6f3182d03240"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="c2c05028-2111-4072-ad38-7fca9ab51ac1"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5e06546-f7a5-4dab-b386-28f0d640b3b3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     PESSOA."CODIGO_PESSOA" AS PESSOA_CODIGO_PESSOA,
+     PESSOA."NOME" AS PESSOA_NOME,
+     PESSOA."TIPO_PESSOA" AS PESSOA_TIPO_PESSOA,
+     PESSOA."CEP" AS PESSOA_CEP,
+     PESSOA."RUA" AS PESSOA_RUA,
+     PESSOA."BAIRRO" AS PESSOA_BAIRRO,
+     PESSOA."CIDADE" AS PESSOA_CIDADE,
+     PESSOA."UF" AS PESSOA_UF,
+     PESSOA."NUMERO" AS PESSOA_NUMERO,
+     PESSOA."EMAIL" AS PESSOA_EMAIL,
+     PESSOA_FISICA."CODIGO_PESSOA" AS PESSOA_FISICA_CODIGO_PESSOA,
+     PESSOA_FISICA."CPF" AS PESSOA_FISICA_CPF,
+     PESSOA_FISICA."RG" AS PESSOA_FISICA_RG,
+     PESSOA_FISICA."DATA_NASCIMENTO" AS PESSOA_FISICA_DATA_NASCIMENTO,
+     PESSOA_FISICA."ESTADOCIVIL" AS PESSOA_FISICA_ESTADOCIVIL,
+     PESSOA_FISICA."SEXO" AS PESSOA_FISICA_SEXO
+FROM
+     "PAP"."PESSOA" PESSOA INNER JOIN "PAP"."PESSOA_FISICA" PESSOA_FISICA ON PESSOA."CODIGO_PESSOA" = PESSOA_FISICA."CODIGO_PESSOA"]]>
+	</queryString>
+	<field name="PESSOA_CODIGO_PESSOA" class="java.math.BigDecimal"/>
+	<field name="PESSOA_NOME" class="java.lang.String"/>
+	<field name="PESSOA_TIPO_PESSOA" class="java.lang.String"/>
+	<field name="PESSOA_CEP" class="java.lang.String"/>
+	<field name="PESSOA_RUA" class="java.lang.String"/>
+	<field name="PESSOA_BAIRRO" class="java.lang.String"/>
+	<field name="PESSOA_CIDADE" class="java.lang.String"/>
+	<field name="PESSOA_UF" class="java.lang.String"/>
+	<field name="PESSOA_NUMERO" class="java.math.BigDecimal"/>
+	<field name="PESSOA_EMAIL" class="java.lang.String"/>
+	<field name="PESSOA_FISICA_CODIGO_PESSOA" class="java.math.BigDecimal"/>
+	<field name="PESSOA_FISICA_CPF" class="java.lang.String"/>
+	<field name="PESSOA_FISICA_RG" class="java.lang.String"/>
+	<field name="PESSOA_FISICA_DATA_NASCIMENTO" class="java.sql.Timestamp"/>
+	<field name="PESSOA_FISICA_ESTADOCIVIL" class="java.lang.String"/>
+	<field name="PESSOA_FISICA_SEXO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="143" y="0" width="278" height="39" uuid="c7b913ac-fcd9-4c08-9550-2621d4376563"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial Black" size="24"/>
+				</textElement>
+				<text><![CDATA[Relatório de Clientes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="355" y="0" width="200" height="20" uuid="897aa651-bee4-499e-bf7d-62694bb3ed6b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e29ef08c-958d-4b8c-945a-ad74508ff80c"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="1" width="100" height="20" uuid="f3afd16e-bcd4-4a87-acfc-669df927a9aa"/>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="1" width="142" height="20" uuid="440862e0-f7f7-4713-bc59-605d53131e1f"/>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="d2ced126-b09a-4bce-a7c5-f7ebbb21b67a"/>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="3" width="100" height="20" uuid="ad22586a-1be0-433d-8b42-34fc5c24aa67"/>
+				<textFieldExpression><![CDATA[$F{PESSOA_NOME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="3" width="100" height="20" uuid="9af7d6da-8c97-45b2-95de-ebbacc8ad7d0"/>
+				<textFieldExpression><![CDATA[$F{PESSOA_FISICA_CPF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="3" width="142" height="20" uuid="6d4ff198-74ff-4bd3-b6d3-b616ad7e3b55"/>
+				<textFieldExpression><![CDATA[$F{PESSOA_CIDADE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="3" width="100" height="20" uuid="57299692-f240-471b-9986-551c2cddd7c2"/>
+				<textFieldExpression><![CDATA[$F{PESSOA_UF}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="7fd58258-503f-4005-b0be-6f3182d03240"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="c2c05028-2111-4072-ad38-7fca9ab51ac1"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
